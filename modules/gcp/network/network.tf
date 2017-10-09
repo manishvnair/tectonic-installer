@@ -22,15 +22,17 @@ resource "google_compute_network" "tectonic-network" {
 
 ## Two subnetworks (masters, workers)
 resource "google_compute_subnetwork" "tectonic-master-subnet" {
-  name          = "tectonic-master-subnet"
-  ip_cidr_range = "${var.master_ip_cidr_range}"
-  network       = "${google_compute_network.tectonic-network.self_link}"
-  region        = "${var.gcp_region}"
+  name                     = "tectonic-master-subnet"
+  ip_cidr_range            = "${var.master_ip_cidr_range}"
+  network                  = "${google_compute_network.tectonic-network.self_link}"
+  region                   = "${var.gcp_region}"
+  private_ip_google_access = true
 }
 
 resource "google_compute_subnetwork" "tectonic-worker-subnet" {
-  name          = "tectonic-worker-subnet"
-  ip_cidr_range = "${var.worker_ip_cidr_range}"
-  network       = "${google_compute_network.tectonic-network.self_link}"
-  region        = "${var.gcp_region}"
+  name                     = "tectonic-worker-subnet"
+  ip_cidr_range            = "${var.worker_ip_cidr_range}"
+  network                  = "${google_compute_network.tectonic-network.self_link}"
+  region                   = "${var.gcp_region}"
+  private_ip_google_access = true
 }

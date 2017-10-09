@@ -39,6 +39,64 @@ variable "tectonic_gcp_zones" {
   description = "List of two or more zones to use from specified GCP region."
 }
 
+variable "tectonic_gcp_vpc_cidr_block" {
+  type    = "string"
+  default = "10.0.0.0/16"
+
+  description = <<EOF
+Block of IP addresses used by the VPC.
+This should not overlap with any other networks, such as a private datacenter connected via Cloud Interconnect.
+EOF
+}
+
+variable "tectonic_gcp_external_vpc_id" {
+  type = "string"
+
+  description = <<EOF
+(optional) ID of an existing VPC to launch nodes into.
+If unset a new VPC is created.
+
+Example: `vpc-123456`
+EOF
+
+  default = ""
+}
+
+variable "tectonic_gcp_private_access" {
+  default = true
+
+  description = <<EOF
+(optional) If set to true, VMs on a subnetwork to reach Google APIs and services using an internal IP address rather than an external IP address.
+If set to false, only virtual machine (VM) instances with external IP addresses can access Google APIs.
+EOF
+}
+
+variable "tectonic_gcp_external_master_subnet_ids" {
+  type = "list"
+
+  description = <<EOF
+(optional) List of subnet IDs within an existing VPC to deploy master nodes into.
+Required to use an existing VPC and the list must match the AZ count.
+
+Example: `["subnet-111111", "subnet-222222", "subnet-333333"]`
+EOF
+
+  default = []
+}
+
+variable "tectonic_gcp_external_worker_subnet_ids" {
+  type = "list"
+
+  description = <<EOF
+(optional) List of subnet IDs within an existing VPC to deploy worker nodes into.
+Required to use an existing VPC and the list must match the AZ count.
+
+Example: `["subnet-111111", "subnet-222222", "subnet-333333"]`
+EOF
+
+  default = []
+}
+
 variable "tectonic_gcp_master_gce_type" {
   type        = "string"
   description = "Instance size for the master node(s). Example: `n1-standard-2`."

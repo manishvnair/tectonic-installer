@@ -163,6 +163,24 @@ tectonic_gcp_worker_gce_type = "n1-standard-2"
 // List of two or more zones to use from specified GCP region.
 tectonic_gcp_zones = ""
 
+// (optional) List of subnet IDs within an existing VPC to deploy master nodes into.
+// Required to use an existing VPC and the list must match the AZ count.
+// 
+// Example: `["subnet-111111", "subnet-222222", "subnet-333333"]`
+// tectonic_gcp_external_master_subnet_ids = ""
+
+// (optional) ID of an existing VPC to launch nodes into.
+// If unset a new VPC is created.
+// 
+// Example: `vpc-123456`
+// tectonic_gcp_external_vpc_id = ""
+
+// (optional) List of subnet IDs within an existing VPC to deploy worker nodes into.
+// Required to use an existing VPC and the list must match the AZ count.
+// 
+// Example: `["subnet-111111", "subnet-222222", "subnet-333333"]`
+// tectonic_gcp_external_worker_subnet_ids = ""
+
 // The path to the tectonic licence file.
 // You can download the Tectonic license file from your Account overview page at [1].
 // 

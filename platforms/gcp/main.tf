@@ -22,15 +22,17 @@ provider "google" {
 module "network" {
   source = "../../modules/gcp/network"
 
-  gcp_region           = "${var.tectonic_gcp_region}"
-  master_ip_cidr_range = "10.10.0.0/16"
-  worker_ip_cidr_range = "10.11.0.0/16"
+  gcp_region              = "${var.tectonic_gcp_region}"
+  cidr_block              = "${var.tectonic_gcp_vpc_cidr_block}"
+  external_vpc_id         = "${var.tectonic_gcp_external_vpc_id}"
+  external_master_subnets = "${compact(var.tectonic_gcp_external_master_subnet_ids)}"
+  external_worker_subnets = "${compact(var.tectonic_gcp_external_worker_subnet_ids)}"
 
-  managed_zone_name = "${var.tectonic_gcp_ext_google_managedzone_name}"
-  base_domain       = "${var.tectonic_base_domain}"
-  cluster_name      = "${var.tectonic_cluster_name}"
+  managed_zone_name       = "${var.tectonic_gcp_ext_google_managedzone_name}"
+  base_domain             = "${var.tectonic_base_domain}"
+  cluster_name            = "${var.tectonic_cluster_name}"
 
-  master_instance_group = "${module.masters.instance_group}"
+  master_instance_group   = "${module.masters.instance_group}"
 
   # VPC layout settings.
   #

@@ -18,12 +18,20 @@ variable "gcp_region" {
   type = "string"
 }
 
-variable "master_ip_cidr_range" {
+variable "cidr_block" {
   type = "string"
 }
 
-variable "worker_ip_cidr_range" {
+variable "external_vpc_id" {
   type = "string"
+}
+
+variable "external_master_subnets" {
+  type = "list"
+}
+
+variable "external_worker_subnets" {
+  type = "list"
 }
 
 variable "managed_zone_name" {
